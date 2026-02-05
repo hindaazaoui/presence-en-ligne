@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>(@nathalie_bronchard) • Photos et vidéos Instagram</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            color: #262626;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #dbdbdb;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-content {
+            width: 975px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            align-items: center;
+        }
+        .logo-insta { font-size: 24px; font-weight: bold; font-family: serif; font-style: italic; }
+        .search-fake { background: #efefef; border-radius: 8px; width: 260px; padding: 7px 16px; color: #8e8e8e; font-size: 14px; }
+
+        /* --- PROFILE AREA --- */
+        .container { max-width: 935px; margin: 30px auto; padding: 0 20px; }
+        
+        header { display: flex; margin-bottom: 44px; align-items: flex-start; }
+        .pfp-container { width: 30%; display: flex; justify-content: center; }
+        .pfp { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 1px solid #dbdbdb; }
+
+        .profile-info { width: 70%; }
+        .user-row { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .user-row h2 { font-size: 28px; font-weight: 300; margin: 0; }
+        .btn-follow { background-color: #0095f6; color: white; border: none; padding: 5px 20px; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; }
+
+        .stats { display: flex; list-style: none; padding: 0; margin-bottom: 20px; }
+        .stats li { margin-right: 40px; font-size: 16px; }
+        .stats b { font-weight: 600; }
+
+        .bio { font-size: 16px; line-height: 1.5; }
+        .bio b { display: block; margin-bottom: 2px; }
+
+        /* --- GRID --- */
+        .tabs {
+            border-top: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+        }
+        .tab {
+            padding: 15px 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8e8e8e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        .tab.active { color: #262626; border-top: 1px solid #262626; margin-top: -1px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            padding-top: 10px;
+        }
+
+        .post { position: relative; aspect-ratio: 1/1; background-color: #eee; }
+        .post img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .post-overlay {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex; justify-content: center; align-items: center;
+            color: white; font-weight: bold; opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .post:hover .post-overlay { opacity: 1; }
+
+        /* --- LOCATION TAGS (Comme sur Insta) --- */
+        .loc-tag {
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 8px; border-radius: 4px;
+            font-size: 11px; font-weight: 600; color: #00376b;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-content">
+        <div class="logo-insta">Instagram</div>
+        <div class="search-fake">Rechercher</div>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <div class="pfp-container">
+            <img src="fleur.jpg" class="pfp" alt="Magali">
+        </div>
+        <section class="profile-info">
+            <div class="user-row">
+                <h2>nathalie_bronchard</h2>
+                <button class="btn-follow">Suivre</button>
+                <span style="font-size: 20px; cursor: pointer;">•••</span>
+            </div>
+            <ul class="stats">
+                <li><b>3</b> publications</li>
+                <li><b>821</b> followers</li>
+                <li><b>1 204</b> suivi(e)s</li>
+            </ul>
+            <div class="bio">
+                <b>Magali | Bordeaux </b>
+                Mon album photo moderne.<br>
+                ✨ Maman de Léo & Emma<br>
+               chef de projet  @capgemini
+            </div>
+        </section>
+    </header>
+
+    <div class="tabs">
+        <div class="tab active">Publications</div>
+        <div class="tab">Reels</div>
+        <div class="tab">Identifié</div>
+    </div>
+
+    <div class="grid">
+        <div class="post">
+            <div class="loc-tag">📍 École Maternelle Les Iris</div>
+            <img src="Mom_pic3.png">
+            <div class="post-overlay">❤️ 85  💬 2</div>
+        </div>
+
+        <div class="post">
+            <div class="loc-tag">📍 Dojo Bordelais</div>
+            <img src="Mom_pic2.png">
+            <div class="post-overlay">❤️ 124  💬 9</div>
+        </div>
+
+        <div class="post">
+            <div class="loc-tag">📍 Home</div>
+            <img src="Mom_pic1.png">
+            <div class="post-overlay">❤️ 99  💬 21</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
