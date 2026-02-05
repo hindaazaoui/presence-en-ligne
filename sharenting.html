@@ -2,143 +2,163 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Webdoc - Sharenting Investigation</title>
+    <title>Magali (@nathalie_bronchard) • Photos et vidéos Instagram</title>
     <style>
-        :root {
-            --insta-blue: #0095f6;
-            --danger: #ff3b30;
-            --scanner-color: rgba(255, 59, 48, 0.4);
-        }
-
         body {
-            font-family: -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #fafafa;
             margin: 0;
-            overflow-x: hidden;
+            color: #262626;
         }
 
-        .container { max-width: 935px; margin: 0 auto; padding: 20px; transition: filter 0.5s; }
+        /* --- NAVIGATION BAR --- */
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #dbdbdb;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-content {
+            width: 975px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            align-items: center;
+        }
+        .logo-insta { font-size: 24px; font-weight: bold; font-family: serif; font-style: italic; }
+        .search-fake { background: #efefef; border-radius: 8px; width: 260px; padding: 7px 16px; color: #8e8e8e; font-size: 14px; }
 
-        /* --- HEADER & NAV --- */
-        nav { background: #fff; border-bottom: 1px solid #dbdbdb; padding: 10px 0; text-align: center; font-weight: bold; font-style: italic; font-size: 24px; }
-        header { display: flex; align-items: center; padding: 40px 0; }
-        .pfp { width: 150px; height: 150px; border-radius: 50%; margin-right: 80px; border: 1px solid #dbdbdb; }
+        /* --- PROFILE AREA --- */
+        .container { max-width: 935px; margin: 30px auto; padding: 0 20px; }
+        
+        header { display: flex; margin-bottom: 44px; align-items: flex-start; }
+        .pfp-container { width: 30%; display: flex; justify-content: center; }
+        .pfp { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 1px solid #dbdbdb; }
+
+        .profile-info { width: 70%; }
+        .user-row { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .user-row h2 { font-size: 28px; font-weight: 300; margin: 0; }
+        .btn-follow { background-color: #0095f6; color: white; border: none; padding: 5px 20px; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; }
+
+        .stats { display: flex; list-style: none; padding: 0; margin-bottom: 20px; }
+        .stats li { margin-right: 40px; font-size: 16px; }
+        .stats b { font-weight: 600; }
+
+        .bio { font-size: 16px; line-height: 1.5; }
+        .bio b { display: block; margin-bottom: 2px; }
 
         /* --- GRID --- */
-        .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-        .post { position: relative; aspect-ratio: 1/1; background: #000; overflow: hidden; }
-        .post img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s; }
-
-        /* --- OVERLAYS DANGER (Cachés au début) --- */
-        .danger-title {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); color: var(--danger);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 15px; text-align: center; opacity: 0; transition: opacity 0.5s;
-            font-family: 'Courier New', Courier, monospace; font-size: 14px;
+        .tabs {
+            border-top: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
         }
-        .danger-title b { font-size: 18px; margin-bottom: 10px; text-transform: uppercase; }
-
-        /* --- SCANNER ANIMATION --- */
-        .scanner-bar {
-            position: absolute; top: -10px; left: 0; width: 100%; height: 5px;
-            background: var(--danger); box-shadow: 0 0 15px var(--danger);
-            display: none; z-index: 10;
+        .tab {
+            padding: 15px 0;
+            font-size: 12px;
+            font-weight: 600;
+            color: #8e8e8e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
         }
+        .tab.active { color: #262626; border-top: 1px solid #262626; margin-top: -1px; }
 
-        @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
-        }
-
-        /* --- CONTROLES --- */
-        .controls { text-align: center; padding: 20px; position: sticky; bottom: 0; background: white; border-top: 1px solid #dbdbdb; z-index: 100; }
-        .btn-scan {
-            background: var(--danger); color: white; border: none; padding: 12px 24px;
-            border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            padding-top: 10px;
         }
 
-        /* --- ETAT ANALYSE --- */
-        .analyzed img { opacity: 0.3; }
-        .analyzed .danger-title { opacity: 1; }
+        .post { position: relative; aspect-ratio: 1/1; background-color: #eee; }
+        .post img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .post-overlay {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.3);
+            display: flex; justify-content: center; align-items: center;
+            color: white; font-weight: bold; opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .post:hover .post-overlay { opacity: 1; }
+
+        /* --- LOCATION TAGS (Comme sur Insta) --- */
+        .loc-tag {
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 8px; border-radius: 4px;
+            font-size: 11px; font-weight: 600; color: #00376b;
+        }
     </style>
 </head>
 <body>
 
-<nav>Instagram</nav>
+<nav>
+    <div class="nav-content">
+        <div class="logo-insta">Instagram</div>
+        <div class="search-fake">Rechercher</div>
+    </div>
+</nav>
 
-<div class="container" id="main-content">
+<div class="container">
     <header>
-        <img src="img_pic3.png" class="pfp">
-        <div>
-            <h2>Mummy_Mags_Family</h2>
-            <p><b>Magali | Bordeaux 🌿</b><br>Mon album photo moderne. Je ne vois pas le mal.</p>
+        <div class="pfp-container">
+            <img src="fleur.jpg" class="pfp" alt="Magali">
         </div>
+        <section class="profile-info">
+            <div class="user-row">
+                <h2>nathalie_bronchard</h2>
+                <button class="btn-follow">Suivre</button>
+                <span style="font-size: 20px; cursor: pointer;">•••</span>
+            </div>
+            <ul class="stats">
+                <li><b>3</b> publications</li>
+                <li><b>821</b> followers</li>
+                <li><b>1 204</b> suivi(e)s</li>
+            </ul>
+            <div class="bio">
+                <b>Magali | Bordeaux </b>
+                Mon album photo moderne.<br>
+                ✨ Maman de Léo & Emma<br>
+               chef de projet  @capgemini
+            </div>
+        </section>
     </header>
 
-    <div class="post-grid">
-        <div class="post" id="post1">
-            <div class="scanner-bar"></div>
+    <div class="tabs">
+        <div class="tab active">Publications</div>
+        <div class="tab">Reels</div>
+        <div class="tab">Identifié</div>
+    </div>
+
+    <div class="grid">
+        <div class="post">
+            <div class="loc-tag">📍 École Maternelle Les Iris</div>
             <img src="Mom_pic3.png">
-            <div class="danger-title">
-                <b>VECTEUR D'INTERCEPTION</b>
-                <p>École Maternelle Les Iris<br>Horaire identifié : 08h20</p>
-            </div>
+            <div class="post-overlay">❤️ 85  💬 2</div>
         </div>
 
-        <div class="post" id="post2">
-            <div class="scanner-bar"></div>
+        <div class="post">
+            <div class="loc-tag">📍 Dojo Bordelais</div>
             <img src="Mom_pic2.png">
-            <div class="danger-title">
-                <b>GÉOLOCALISATION RÉCURRENTE 33100</b>
-                <p>Dojo Bordelais<br>Présence prévisible : Mercredi 16h</p>
-            </div>
+            <div class="post-overlay">❤️ 124  💬 9</div>
         </div>
 
-        <div class="post" id="post3">
-            <div class="scanner-bar"></div>
-            <img src="mom">
-            <div class="danger-title">
-                <b>EXFILTRATION ENT</b>
-                <p>Identifiant visible sur les comptes instagram des enfants<br>Accès complet aux dossiers scolaires via i have been pwnd</p>
-            </div>
+        <div class="post">
+            <div class="loc-tag">📍 Home</div>
+            <img src="Mom_pic1.png">
+            <div class="post-overlay">❤️ 99  💬 21</div>
         </div>
     </div>
 </div>
-
-<div class="controls">
-    <button class="btn-scan" onclick="startInvestigation()">Lancer l'Analyse Inversée</button>
-    <p id="status-text" style="margin-top:10px; font-family:monospace; color:#666; font-size:12px;">Prêt pour analyse OSINT...</p>
-</div>
-
-<script>
-    function startInvestigation() {
-        const posts = [document.getElementById('post1'), document.getElementById('post2'), document.getElementById('post3')];
-        const btn = document.querySelector('.btn-scan');
-        const status = document.getElementById('status-text');
-
-        btn.style.display = 'none';
-        status.innerText = "RECHERCHE INVERSÉE EN COURS SUR DES BASES TIERS...";
-
-        posts.forEach((post, index) => {
-            setTimeout(() => {
-                const bar = post.querySelector('.scanner-bar');
-                bar.style.display = 'block';
-                bar.style.animation = 'scan 1.5s linear infinite';
-                
-                status.innerText = `ANALYSE DE L'IMAGE ${index + 1}...`;
-
-                setTimeout(() => {
-                    bar.style.display = 'none';
-                    post.classList.add('analyzed');
-                    if(index === 2) {
-                        status.innerHTML = "<b style='color:red;'>ALERTE : 14 VIOLATIONS DE DONNÉES TROUVÉES. PROFIL RECONSTITUÉ À 94%.</b>";
-                    }
-                }, 1500);
-            }, index * 1800);
-        });
-    }
-</script>
 
 </body>
 </html>
