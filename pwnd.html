@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Have I Been Pwned - Magali Freelance</title>
+    <style>
+        :root {
+            --hibp-blue: #0081c2;
+            --hibp-red: #ff4d4d;
+            --hibp-dark-red: #350505;
+            --bg-dark: #070707;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --neon-red: #ff1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', "Helvetica Neue", sans-serif;
+            background: var(--bg-dark);
+            color: white;
+            margin: 0;
+            transition: background 1s ease;
+        }
+
+        .nav-minimal { padding: 20px 60px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .logo { font-size: 22px; font-weight: 300; }
+        .logo b { color: var(--hibp-blue); font-weight: 700; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- SEARCH SECTION --- */
+        .search-area { text-align: center; margin-bottom: 60px; }
+        h1 { font-size: 56px; font-weight: 300; margin-bottom: 30px; }
+        .search-box { display: flex; max-width: 850px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        input { flex: 1; padding: 25px; border: none; font-size: 22px; outline: none; background: #fff; color: #111; }
+        button { background: var(--hibp-blue); color: white; border: none; padding: 0 45px; font-size: 22px; font-weight: bold; cursor: pointer; }
+
+        /* --- RESULTS (PWNED MODE) --- */
+        #pwned-content { display: none; }
+        .is-pwned #pwned-content { display: block; }
+        .is-pwned { background: var(--hibp-dark-red); }
+
+        .pwn-header { background: var(--hibp-red); padding: 40px; text-align: center; font-size: 48px; font-weight: 800; margin-bottom: 50px; animation: shake 0.5s ease; }
+
+        /* --- BREACH HISTORY MODULE (L'image demandée) --- */
+        .history-card {
+            background: linear-gradient(135deg, #1e0a0a 0%, #050505 100%);
+            border: 1px solid var(--neon-red);
+            border-radius: 12px;
+            padding: 45px;
+            box-shadow: 0 0 30px rgba(255, 26, 26, 0.25);
+            margin-bottom: 40px;
+        }
+        .count { font-size: 100px; font-weight: 900; color: white; line-height: 1; margin: 0; }
+        .count-label { font-size: 32px; font-weight: 700; color: white; margin-bottom: 25px; }
+        .count-desc { font-size: 18px; color: #ffcccc; max-width: 700px; line-height: 1.6; }
+
+        /* --- BREACH EXAMPLES --- */
+        .breach-list-title { font-size: 22px; color: #888; margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+        .breach-item {
+            display: flex; gap: 20px; background: rgba(0,0,0,0.4); 
+            padding: 25px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--hibp-red);
+        }
+        .breach-logo { width: 70px; height: 70px; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #222; font-weight: bold; }
+        .breach-info h3 { margin: 0 0 8px 0; color: #ff6666; font-size: 20px; }
+        .breach-info p { margin: 0; font-size: 14px; color: #bbb; }
+        .breach-data { color: #888; font-size: 12px; margin-top: 10px; font-style: italic; }
+
+        /* --- SECURITY BOX --- */
+        .security-banner {
+            background: rgba(0, 40, 80, 0.4); border: 1px solid rgba(0, 129, 194, 0.5);
+            padding: 25px 35px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .btn-notify { background: #0081c2; color: white; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-15px); } 75% { transform: translateX(15px); } }
+        @keyframes loading { 0% { content: "."; } 33% { content: ".."; } 66% { content: "..."; } }
+        #loader { display: none; font-family: monospace; color: var(--hibp-blue); margin-top: 20px; font-size: 18px; }
+        #loader:after { content: ""; animation: loading 1s infinite; }
+    </style>
+</head>
+<body id="main-body">
+
+<nav class="nav-minimal">
+    <div class="logo">';-- have i been <b>pwned?</b></div>
+</nav>
+
+<div class="container">
+    <div class="search-area">
+        <h1>';-- have i been pwned?</h1>
+        <div class="search-box">
+            <input type="text" id="email-field" value="magalifreelance@gmail.com">
+            <button onclick="triggerPwn()">pwned?</button>
+        </div>
+        <div id="loader">QUERYING BREACH DOMAINS</div>
+    </div>
+
+    <div id="pwned-content">
+        <div class="pwn-header">Oh no — pwned!</div>
+
+        <div class="history-card">
+            <h2 class="count">14</h2>
+            <div class="count-label">Data Breaches</div>
+            <p class="count-desc">
+                Attention Magali : Votre adresse e-mail a été trouvée dans 14 violations de données distinctes. 
+                Certaines de ces fuites contiennent des informations bancaires et des mots de passe en clair.
+            </p>
+        </div>
+
+        <div class="breach-list-title">Principales sources de compromission</div>
+
+        <div class="breach-item">
+            <div class="breach-logo" style="background: #00c4cc; color: white;">Canva</div>
+            <div class="breach-info">
+                <h3>Canva (Mai 2019)</h3>
+                <p>Une intrusion massive a permis l'accès aux données de 137 millions d'utilisateurs. L'email magalifreelance@gmail.com était présent dans les tables de production.</p>
+                <div class="breach-data">Data: Emails, Geographic locations, Names, Passwords (bcrypt)</div>
+            </div>
+        </div>
+
+        <div class="breach-item">
+            <div class="breach-logo" style="background: #0077b5; color: white;">In</div>
+            <div class="breach-info">
+                <h3>LinkedIn (Juin 2021)</h3>
+                <p>700 millions d'enregistrements ont été mis en vente sur le Dark Web suite à une exploitation d'API. Magali Freelance y apparaît avec son numéro de téléphone pro.</p>
+                <div class="breach-data">Data: Education levels, Email addresses, Job titles, Phone numbers</div>
+            </div>
+        </div>
+
+        <div class="breach-item">
+            <div class="breach-logo" style="background: #f48024; color: white;">SO</div>
+            <div class="breach-info">
+                <h3>Freelance-Network.io (Janvier 2026)</h3>
+                <p><b>FUITE RÉCENTE :</b> La base de données de cette plateforme européenne de mise en relation a été exfiltrée. Les contrats et les RIB ont été compromis.</p>
+                <div class="breach-data">Data: Bank details, Passwords, Full name, Private Messages</div>
+            </div>
+        </div>
+
+        <div class="breach-item">
+            <div class="breach-logo" style="background: #333; color: white;">W</div>
+            <div class="breach-info">
+                <h3>Wattpad (Juillet 2020)</h3>
+                <p>Une fuite majeure a exposé les identifiants de millions de comptes, souvent utilisés avec le même mot de passe que la boîte mail principale.</p>
+                <div class="breach-data">Data: Dates of birth, Email addresses, IP addresses, Passwords</div>
+            </div>
+        </div>
+
+        <div class="security-banner" style="margin-top: 50px;">
+            <div class="sec-text">
+                <b style="font-size: 18px; display: block;">Password Security Report</b>
+                <span style="color: #888; font-size: 14px;">Magali, check if your current master password is safe.</span>
+            </div>
+            <a href="#" class="btn-notify">Notify Me</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function triggerPwn() {
+        const loader = document.getElementById('loader');
+        const content = document.getElementById('pwned-content');
+        const body = document.getElementById('main-body');
+
+        loader.style.display = "block";
+        
+        setTimeout(() => {
+            loader.style.display = "none";
+            body.classList.add('is-pwned');
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }, 1800);
+    }
+</script>
+
+</body>
+</html>

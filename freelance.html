@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOCIÉTÉ NEBULA - Pappers</title>
+    <style>
+        :root {
+            --pappers-blue: #0046fb;
+            --pappers-bg: #f5f7fa;
+            --text-main: #2c3e50;
+            --text-light: #6c757d;
+            --border: #e2e8f0;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--pappers-bg);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            background: white;
+            padding: 10px 50px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--pappers-blue);
+            text-decoration: none;
+            margin-right: 30px;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fcfcfc;
+        }
+
+        /* --- HEADER ENTREPRISE --- */
+        .company-header {
+            background: white;
+            padding: 40px 50px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .breadcrumb { font-size: 12px; color: var(--text-light); margin-bottom: 15px; }
+
+        .title-row { display: flex; align-items: center; gap: 15px; }
+        .status-badge {
+            background: #e1f7ed;
+            color: var(--success);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .metrics-bar {
+            display: flex;
+            gap: 40px;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .metric b { display: block; font-size: 18px; color: var(--pappers-blue); }
+
+        /* --- LAYOUT --- */
+        .main-content {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            background: #fafbfc;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-body { padding: 20px; }
+
+        /* --- TABLES --- */
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table tr td { padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        .label { color: var(--text-light); width: 40%; }
+        .value { font-weight: 500; }
+
+        /* --- SIDEBAR ACTIONS --- */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .btn-blue { background: var(--pappers-blue); color: white; border: none; }
+        .btn-outline { border: 1px solid var(--pappers-blue); color: var(--pappers-blue); background: white; }
+
+        .scan-animation {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--pappers-blue), transparent);
+            position: relative;
+            animation: scan 2s infinite linear;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">pappers</a>
+    <div class="search-bar">
+        <input type="text" placeholder="Rechercher une entreprise, un dirigeant...">
+    </div>
+</nav>
+
+<header class="company-header">
+    <div class="breadcrumb">Recherche > Entreprise > Sud-Ouest > Bordeaux</div>
+    <div class="title-row">
+        <h1>NEBULA SYSTEMS SAS</h1>
+        <span class="status-badge">● Inscrite</span>
+    </div>
+    <div class="metrics-bar">
+        <div class="metric"><b>984 551 230</b> SIREN</div>
+        <div class="metric"><b>SAS</b> Forme juridique</div>
+        <div class="metric"><b>1 250 000 €</b> Capital social</div>
+        <div class="metric"><b>45 à 99</b> Salariés</div>
+    </div>
+</header>
+
+<div class="main-content">
+    <div class="content-left">
+        <div class="card">
+            <div class="card-header">Fiche d'identité</div>
+            <div class="card-body">
+                <table class="data-table">
+                    <tr><td class="label">Dénomination</td><td class="value">NEBULA SYSTEMS SAS</td></tr>
+                    <tr><td class="label">SIRET (siège)</td><td class="value">98455123000012</td></tr>
+                    <tr><td class="label">TVA Intracommunautaire</td><td class="value">FR 88 984551230</td></tr>
+                    <tr><td class="label">Date de création</td><td class="value">14 oct. 2024</td></tr>
+                    <tr><td class="label">Adresse</td><td class="value">42 Rue de l'Innovation, 33000 Bordeaux</td></tr>
+                    <tr><td class="label">Activité (NAF)</td><td class="value">62.01Z - Programmation informatique</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Dirigeants & Mandataires</div>
+            <div class="card-body">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #999;">JS</div>
+                    <div>
+                        <div class="value">Jean-Sébastien VALMONT</div>
+                        <div class="label" style="font-size: 12px;">Président (né en 1978)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <div class="card">
+            <div class="card-header">Documents officiels</div>
+            <div class="card-body">
+                <a href="#" class="btn btn-blue">Extraire le Kbis</a>
+                <a href="#" class="btn btn-outline">Statuts mis à jour</a>
+                <p style="font-size: 11px; color: var(--text-light); text-align: center; margin-top: 15px;">
+                    Dernier dépôt le 12/01/2026
+                </p>
+            </div>
+        </div>
+
+        <div class="card" style="border: 1px solid #ffeeba; background: #fffcf0;">
+            <div class="card-body">
+                <b style="color: #856404; font-size: 14px;">Surveillance en cours</b>
+                <div class="scan-animation"></div>
+                <p style="font-size: 12px; margin-top: 10px;">Recevez une alerte par mail à chaque modification de cette entreprise.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
